@@ -7,15 +7,35 @@ game_over=False
 # I need a 3x3 board
 board=list(range(1, pow(board_size, 2)+1)) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+# Create board dynamically 
+board_2d=[]
+
+for x in range(0, board_size):
+  board_2d.append(board[slice(board_size*x, board_size*x+board_size)])
+
+def define_board():
+  global board_size
+  # Get user to enter the board size they want to play
+  print("\nEnter a number to define the board size \ne.g. 4 for 4x4 \nIf no value is entered, the default will be 3x3")
+
+  board_size = 3 if input() == '' else input()
 
 # Display the board
 def display_board():
-    print("\n")
-    print(str(board[0])+" | "+str(board[1])+" | "+str(board[2]))
-    print("--------")
-    print(str(board[3])+" | "+str(board[4])+" | "+str(board[5]))
-    print("--------")
-    print(str(board[6])+" | "+str(board[7])+" | "+str(board[8]))
+    # Prints out the 2d array called board_2d into a board
+    for row in board_2d:
+      for col in row:
+        print(col, end=' ')
+
+         # Check if the column is the last element in the first row
+        if row.index(col) != len(row)-1:
+            # Not the last element
+            print(' | ', end=' ')
+        else:
+            # Its the last element, now check if it is the row is the last element in the board
+            if board_2d.index(row) != len(board_2d)-1:
+                divider='-'* board_size * 5
+                print('\n'+divider)
 
 
 # Flip player
@@ -81,7 +101,10 @@ def play_game():
     # Third, set up player 1 starts first
     turn="player1"
 
-    # Fourth, display the tic tac toe board
+    # Fourth, get user to define the board size
+    define_board()
+    
+    # Fifth, display the tic tac toe board
     display_board()
     
     # Finally, run the game continuously if game is not over(aka no winner)
