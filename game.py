@@ -31,10 +31,16 @@ def get_player_move(turn):
     global board
     
     print("\n"+turn[0]+" choose a box to place an '"+turn[1]+"' into:", end="\n")
-    board_index=int(input())-1
+    player_input=input()
+    board_index=int(player_input)-1
+    # Check if the position has been occupied
+    if(isinstance(board[board_index], int)):
     board[board_index]=turn[1]
     display_board()
     check_for_win(board, turn)
+    else:
+      print('Position '+str(player_input)+' has been filled, please choose another position.')
+      get_player_move(turn)
 
 
 # Check win, row, columns, diagonal
