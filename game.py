@@ -11,12 +11,18 @@ board=list(range(1, pow(board_size, 2)+1)) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 # Display the board
 def display_board():
     print("\n")
-    print(str(board[0])+" | "+str(board[1])+" | "+str(board[2]))
-    print("--------")
-    print(str(board[3])+" | "+str(board[4])+" | "+str(board[5]))
-    print("--------")
-    print(str(board[6])+" | "+str(board[7])+" | "+str(board[8]))
+  for i in board:
+    print(i, end=' ')
+    pos = board.index(i)+1
 
+    if pos % board_size != 0:
+    # Not the last element
+     print(' | ', end=' ')
+    else:
+      if pos % len(board) != 0:
+    # Its the last element, now check if it is the row is the last element in the board
+       divider='-'* board_size * 5
+       print('\n'+divider)
 
 # Flip player
 def switch_player_turn(turn):
@@ -30,7 +36,7 @@ def switch_player_turn(turn):
 def get_player_move(turn):
     global board
     
-    print("\n"+turn[0]+" choose a box to place an '"+turn[1]+"' into:", end="\n")
+    print("\n\n"+turn[0]+" choose a box to place an '"+turn[1]+"' into:")
     player_input=input()
     board_index=int(player_input)-1
     # Check if the position has been occupied
