@@ -2,6 +2,7 @@
 
 # Global Variables
 board_size=3
+
 game_over=False
 
 # I need a 3x3 board
@@ -10,19 +11,19 @@ board=list(range(1, pow(board_size, 2)+1)) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Display the board
 def display_board():
-    print("\n")
+  print("\n")
   for i in board:
     print(i, end=' ')
     pos = board.index(i)+1
-
+  
     if pos % board_size != 0:
     # Not the last element
-     print(' | ', end=' ')
+      print(' | ', end=' ')
     else:
       if pos % len(board) != 0:
     # Its the last element, now check if it is the row is the last element in the board
-       divider='-'* board_size * 5
-       print('\n'+divider)
+        divider='-'* board_size * 5
+        print('\n'+divider)
 
 # Flip player
 def switch_player_turn(turn):
@@ -41,9 +42,9 @@ def get_player_move(turn):
     board_index=int(player_input)-1
     # Check if the position has been occupied
     if(isinstance(board[board_index], int)):
-    board[board_index]=turn[1]
-    display_board()
-    check_for_win(board, turn)
+        board[board_index]=turn[1]
+        display_board()
+        check_for_win(board, turn)
     else:
       print('Position '+str(player_input)+' has been filled, please choose another position.')
       get_player_move(turn)
