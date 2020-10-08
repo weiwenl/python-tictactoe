@@ -16,11 +16,11 @@ def display_board():
     print(i, end=' ')
     pos = board.index(i)+1
   
-    if pos % board_size != 0:
+    if int(pos) % int(board_size) > 0:
     # Not the last element
       print(' | ', end=' ')
     else:
-      if pos % len(board) != 0:
+      if int(pos) % len(board) > 0:
     # Its the last element, now check if it is the row is the last element in the board
         divider='-'* board_size * 5
         print('\n'+divider)
@@ -100,4 +100,5 @@ def play_game():
     
 
 # Run the game
-play_game()
+if __name__ == '__main__':
+    play_game()
